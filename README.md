@@ -1,17 +1,19 @@
-Backend to a Dating App 
+Project Description
+
+This project involves building a comprehensive online marketplace platform where users can buy and sell products, manage their accounts, and interact with sellers. The platform aims to provide a seamless experience for both buyers and sellers.
 
 Installation
 
 - clone the repository
 
 
-`git clone git@github.com:olawuwo-abideen/datingapp.git`
+`git clone git@github.com:olawuwo-abideen/marketplace.git`
 
 
 - navigate to the folder
 
 
-`cd datingapp-main.git`
+`cd marketplace-main.git`
 
 To run the app in development mode
 
