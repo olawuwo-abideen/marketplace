@@ -37,7 +37,7 @@ export class ReviewService {
 
 
 
-  async getReviewsByProduct(productId: string) {
+  async getReviewsByProduct(user: User, productId: string) {
     const reviews = await this.reviewModel
       .find({ product: productId })
       .populate('user', 'name email') 
@@ -51,7 +51,7 @@ export class ReviewService {
   }
 
 
-  async getReviewById(reviewId: string) {
+  async getReviewById(user: User, reviewId: string) {
     const review = await this.reviewModel
       .findById(reviewId)
       .populate('user', 'name email')

@@ -5,11 +5,10 @@ import { User } from 'apps/auth/src/schemas/user.schema';
 import { ReviewDto } from './dto/review.dto';
 import { CurrentUser } from 'apps/auth/src/decorators/current-user.decorator';
 
-@Controller()
+@ApiTags('review')
+@Controller('review')
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}
-
-
 
   @Post('review/:id')
   @ApiOperation({ summary: 'Create product review' })
@@ -35,8 +34,10 @@ return await this.reviewService.createReview(user, productId, data);
   status: HttpStatus.OK,
   description: 'List of product reviews',
 })
-async getReviews(@Param('id') productId: string) {
-  return await this.reviewService.getReviewsByProduct(productId);
+async getReviews(
+  @CurrentUser() user: User,
+  @Param('id') productId: string) {
+  return await this.reviewService.getReviewsByProduct(user, productId);
 }
 
 @Get(':id')
@@ -45,8 +46,10 @@ async getReviews(@Param('id') productId: string) {
   status: HttpStatus.OK,
   description: 'Review details',
 })
-async getReview(@Param('id') reviewId: string) {
-  return await this.reviewService.getReviewById(reviewId);
+async getReview(
+  @CurrentUser() user: User,
+  @Param('id') reviewId: string) {
+  return await this.reviewService.getReviewById(user, reviewId);
 }
   
 }

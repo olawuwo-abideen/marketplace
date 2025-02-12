@@ -11,7 +11,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { User } from 'apps/auth/src/schemas/user.schema';
 
 @ApiTags('admin')
-@Controller()
+@Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 

@@ -14,7 +14,7 @@ import {
   import { JwtService } from '@nestjs/jwt';
   import { SignUpDto } from './dto/signup.dto';
   import { LoginDto } from './dto/login.dto';
-  import { EmailService } from 'src/email/email.service';
+  import { EmailService } from './email/email.service';
   import { ResetPasswordDto } from './dto/reset-password.dto';
   import { nanoid } from 'nanoid';
   import { ResetToken } from './schemas/reset-token.schema';

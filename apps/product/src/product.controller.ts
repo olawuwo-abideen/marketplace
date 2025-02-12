@@ -5,9 +5,12 @@ import { Query as ExpressQuery } from 'express-serve-static-core';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'apps/auth/src/guards/role.guards';
+import { CurrentUser } from 'apps/auth/src/decorators/current-user.decorator';
+import { User } from 'apps/auth/src/schemas/user.schema';
+
 
 @ApiTags('product')
-@Controller()
+@Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
@@ -19,7 +22,9 @@ export class ProductController {
       'Data fetched successfully.',
   })
   @UseGuards(AuthGuard(), RolesGuard)
-  async getProducts(@Req() req): Promise<Product[]>{
+  async getProducts(
+     @CurrentUser() user: User,
+    @Req() req): Promise<Product[]>{
   return this.productService.getProducts()
   }
 
@@ -31,7 +36,9 @@ export class ProductController {
       'Data fetched successfully.',
   })
 @UseGuards(AuthGuard(), RolesGuard)
-async searchProducts(@Query() query: ExpressQuery): Promise<Product[]> {
+async searchProducts(
+  @CurrentUser() user: User,
+  @Query() query: ExpressQuery): Promise<Product[]> {
   return this.productService.searchProducts(query);
 }
 
@@ -45,6 +52,7 @@ async searchProducts(@Query() query: ExpressQuery): Promise<Product[]> {
 })
 @UseGuards(AuthGuard(), RolesGuard)
 async getProduct(
+  @CurrentUser() user: User,
 @Param('id')
 id: string,
 @Req() req
